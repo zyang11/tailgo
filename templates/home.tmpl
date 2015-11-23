@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <title>Tailon</title>
+  <meta name='description' content='Log Viewer'>
+  <meta name='viewport' content='width=device-width'>
+  <link rel="shortcut icon" href='assets/favicon.ico?v=2' />
+
+  <!-- WEBASSETS CSS -->
+  <link rel='stylesheet' href='/css/3rdparty.css'>
+  <link rel='stylesheet' href='/css/selectize.css'>
+  <link rel='stylesheet' href='/css/main.css'>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="/js/jquery-json.js"></script>
+  <!-- WEBASSETS CSS -->
+
+  <!--[if lt IE 9]>
+  <script src='//html5shiv.googlecode.com/svn/trunk/html5.js'></script>
+  <script>window.html5 || document.write('<script src="/js/vendor/html5shiv.js"><\/script>')</script>
+  <![endif]-->
+</head>
+<body>
+  <div class='quickbar'>
+    <div class='button-group hidden'>
+      <a class='action-show-toolbar' title='Show Toolbar'><i class='fa fa-chevron-circle-down'></i></a>
+    </div>
+  </div>
+
+  <div class='toolbar'>
+    <div class="toolbar-item" id="logselect">
+<select tabindex="-1" class="selectized" style="display: none;"><option value="hello.log" selected="selected">hello.log</option></select><div class="selectize-control single"><div class="selectize-input items full has-options has-items"><div data-value="hello.log" class="item">hello.log</div><input type="text" autocomplete="off" tabindex="1" style="width: 4px; opacity: 0; position: absolute; left: -10000px;"></div><div class="selectize-dropdown single" style="display: none; visibility: visible; width: 422px; top: 26px; left: 0px;"><div class="selectize-dropdown-content"><div data-group="ungrouped" class="optgroup"><div class="optgroup-header">ungrouped</div><div data-value="hello.log" data-selectable="" class="option selected">hello.log</div></div></div></div></div>
+</div>
+
+    
+  </div>
+
+
+  <div id='configuration'>
+    <form>
+      <p>
+        <label for="history_lines">Scrollback lines:</label>
+        <input type="number" name="history_lines" id="history_lines", min="0", value="2000">
+      </p>
+      <p>
+        <label for="tail_lines">Tail lines:</label>
+        <input type="number" name="tail_lines" id="tail_lines", min="1", value="60">
+      </p>
+    </form>
+  </div>
+
+  <div class='scrollable'>
+    <div id='logviewer' class='log-view'>
+<span class="log-entry">hello</span>
+<span class="log-entry">hello</span>
+<span class="log-entry log-entry-current">adf</span>
+    </div>
+
+  </div>
+
+  
+
+  <!-- WEBASSETS JS -->
+  <!--script src='/js/3rdparty.js'></script>
+  <script src='/js/main.js'></script-->
+  
+  <!-- WEBASSETS JS -->
+
+  <script type="text/javascript">
+    $(function() {
+
+    var conn;
+
+
+
+    if (window["WebSocket"]) {
+        var url = "ws://"+location.host+"/ws"
+        conn = new WebSocket(url);
+        conn.onclose = function(evt) {
+            console.log("closed");
+        }
+        conn.onmessage = function(evt) {
+          console.log('af');
+            console.log(evt.data);
+        }
+    } else {
+       console.log("<div><b>Your browser does not support WebSockets.</b></div>");
+    }
+    });
+</script>
+
+</body>
+</html>
